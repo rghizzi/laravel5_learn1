@@ -19,6 +19,8 @@ class Article extends Model
     protected $fillable = ['title', 'body', 'excerpts','published_date','user_id'];
 
 
+    //comment test
+
     //DATE for carbon usage
 
     protected $dates = ['published_date'];

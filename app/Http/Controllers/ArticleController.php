@@ -52,6 +52,8 @@ class ArticleController extends Controller
         $input = $request->all();
 
         $input['published_date']=Carbon::now();
+
+        //need to check if authorized
         $input['user_id']=Auth::user()->id;
 
         Article::create($input);
