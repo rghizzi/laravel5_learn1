@@ -15,9 +15,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('numero/{id}','AboutController@testPaolo');
+
 
 Route::get('about','AboutController@show');
-Route::get('articles','ArticleController@index');
+//Route::get('articles','ArticleController@index');
 
 
 //Route::get('articles/create','ArticleController@create');

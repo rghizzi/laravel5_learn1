@@ -16,4 +16,9 @@ class AboutController extends Controller
 
         return view('about.show',compact('persons'));
     }
+
+    public function testPaolo($nome)
+    {
+        return view('test.show', compact('nome'));
+    }
 }

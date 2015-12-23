@@ -8,12 +8,16 @@
 
     @if(count($persons))
 
-    <ul>
-    @foreach($persons as $singleperson)
-       <li>{{$singleperson}}</li>
-    @endforeach
-    </ul>
+        <ul>
+        @foreach($persons as $singleperson)
+           <li>{{$singleperson}}</li>
+        @endforeach
+        </ul>
 
     @endif
 
+@stop
+
+@section('header')
+<strong>All Rights Reserved</strong>
 @stop
