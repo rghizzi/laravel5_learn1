@@ -12,7 +12,7 @@ class AddPublishedDate extends Migration
      */
     public function up()
     {
-        Schema::table('Articles', function (Blueprint $table) {
+        Schema::table('articles', function (Blueprint $table) {
             //
             $table->date("published_date");
         });
@@ -25,7 +25,7 @@ class AddPublishedDate extends Migration
      */
     public function down()
     {
-        Schema::table('Articles', function (Blueprint $table) {
+        Schema::table('articles', function (Blueprint $table) {
             //
             $table->dropColumn("published_date");
         });

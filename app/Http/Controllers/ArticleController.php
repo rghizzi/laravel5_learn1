@@ -41,7 +41,9 @@ class ArticleController extends Controller
 
     public function create()
     {
-        return view('articles.create');
+        if(!Auth::guest()) {
+            return view('articles.create');
+        }
 
     }
 

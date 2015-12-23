@@ -12,7 +12,7 @@ class AddUserToArticle extends Migration
      */
     public function up()
     {
-        Schema::table('Articles', function (Blueprint $table) {
+        Schema::table('articles', function (Blueprint $table) {
             //
             $table->integer('user_id')->unsigned();
 
@@ -31,7 +31,7 @@ class AddUserToArticle extends Migration
      */
     public function down()
     {
-        Schema::table('Articles', function (Blueprint $table) {
+        Schema::table('articles', function (Blueprint $table) {
             //
             $table->dropColumn('user_id');
         });
