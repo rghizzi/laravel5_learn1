@@ -33,3 +33,8 @@ Route::controllers([
    'auth' => 'Auth\AuthController',
     'password' => 'Auth\PasswordController'
 ]);
+
+
+Route::get('/passwordProtectedPage',['middleware' => 'auth', function() {
+    return('protected page content');
+}]);

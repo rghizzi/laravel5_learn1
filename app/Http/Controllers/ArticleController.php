@@ -12,6 +12,14 @@ use Auth;
 
 class ArticleController extends Controller
 {
+
+    public function __construct()
+    {
+        //$this->middleware('auth'); //auth middleware is attached to all the controller
+        $this->middleware('auth',['except' => 'index']); //auth middleware is attached everywhere except the index method
+        $this->middleware('auth',['only' => 'create']); //auth middleware is attached only to create method
+    }
+
     //
     public function index()
 
@@ -22,8 +30,10 @@ class ArticleController extends Controller
         // $articles = Article::latest('published_date')->where('published_date','<=',Carbon::now())->get();
         // SCOPING
 
+        $username=Auth::user()["name"];
+
         $articles = Article::latest('published_date')->published()->get();
-        return view('articles.index',compact('articles'));
+        return view('articles.index',compact('articles','username'));
     }
 
     public function show($id)
@@ -44,6 +54,10 @@ class ArticleController extends Controller
         if(!Auth::guest()) {
             return view('articles.create');
         }
+        else
+        {
+            return redirect('/articles');
+        }
 
     }
 
@@ -59,6 +73,8 @@ class ArticleController extends Controller
         $input['user_id']=Auth::user()->id;
 
         Article::create($input);
+
+        \Session::flash('flash_message','Your article has been succesfully added');
 
         return redirect('articles');
     }
