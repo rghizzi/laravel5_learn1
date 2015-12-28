@@ -10,6 +10,10 @@
             <div class="body">{{$article->body}}</div>
 
             <a href="{{ action('ArticleController@show',[$article->id]) }}"> Read</a>
+
+            {!!  Form::open(array('route' => array('articles.destroy', $article->id), 'method' => 'delete'))  !!}
+            <button type="submit" >Delete</button>
+            {!!  Form::close()  !!}
         </article>
     @endforeach
 

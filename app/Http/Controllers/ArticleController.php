@@ -17,8 +17,8 @@ class ArticleController extends Controller
     public function __construct()
     {
         //$this->middleware('auth'); //auth middleware is attached to all the controller
-        $this->middleware('auth',['except' => 'index']); //auth middleware is attached everywhere except the index method
-        $this->middleware('auth',['only' => 'create']); //auth middleware is attached only to create method
+        $this->middleware('auth',['except' => ['index','show']]); //auth middleware is attached everywhere except the index method
+       // $this->middleware('auth',['only' => 'create']); //auth middleware is attached only to create method
     }
 
     //
@@ -64,7 +64,6 @@ class ArticleController extends Controller
 
     }
 
-    //VALDIATION WITH Requests\CreateArticleRequest $request
     public function store(Requests\ArticleRequest $request)
     {
 
@@ -105,5 +104,12 @@ class ArticleController extends Controller
 
 
         return redirect('articles');
+    }
+
+    public function destroy($id)
+    {
+        Article::destroy($id);
+        return redirect('articles');
+
     }
 }
