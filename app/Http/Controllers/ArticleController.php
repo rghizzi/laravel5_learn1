@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 
 use App\Article;
+use App\Tag;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
@@ -52,7 +53,9 @@ class ArticleController extends Controller
     public function create()
     {
         if(!Auth::guest()) {
-            return view('articles.create');
+            $tags = Tag::lists('name','id');
+
+            return view('articles.create',compact('tags'));
         }
         else
         {
@@ -69,10 +72,13 @@ class ArticleController extends Controller
 
         $input['published_date']=Carbon::now();
 
-        //need to check if authorized
         $input['user_id']=Auth::user()->id;
 
-        Article::create($input);
+        //Auth::user()->articles()->create($request-All());
+
+        $article = Article::create($input);
+
+        $article->tags()->attach($request->input('tag_list'));
 
         \Session::flash('flash_message','Your article has been succesfully added');
 
@@ -83,14 +89,18 @@ class ArticleController extends Controller
     public function edit($id)
     {
         $article = Article::findOrFail($id);
+        $tags = Tag::lists('name','id');
 
-        return view('articles.edit',compact('article'));
+
+        return view('articles.edit',compact('article','tags'));
     }
 
     public function update($id, Requests\ArticleRequest $request)
     {
         $article = Article::findOrFail($id);
+
         $article->update($request->all());
+        $article->tags()->sync($request->input('tag_list'));
 
 
 

@@ -5,11 +5,11 @@
 
     {!! Form::open(['url'=>'articles']) !!}
 
-    @include('articles.form',['submitButtonText' => 'Add New Article']);
+    @include('articles.form',['submitButtonText' => 'Add New Article'])
 
     {!! Form::close()  !!}
 
 
-    @include ('errors.list');
+    @include ('errors.list')
 
 @stop

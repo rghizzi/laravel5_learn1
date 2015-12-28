@@ -34,7 +34,7 @@ class Article extends Model
         $this->attributes['title'] = strtoupper($date);
     }
 
-    //QUERY SCOPE
+
     /**
      * @param $query
      */
@@ -59,5 +59,26 @@ class Article extends Model
     public function user()
     {
         return $this->belongsTo('App\User');
+    }
+
+
+    /**
+     * Return the tags that belongs to this article
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function tags()
+    {
+        return $this->belongsToMany('App\Tag')->withTimestamps();
+    }
+
+    /**
+     * Return the Ids of associated tag
+     *
+     * @return array
+     */
+    public function getTagListAttribute()
+    {
+        return $this->tags->lists('id')->all();
     }
 }

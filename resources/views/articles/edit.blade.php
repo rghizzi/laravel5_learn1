@@ -5,11 +5,11 @@
 
     {!! Form::model($article,['method' => 'PATCH','action'=>['ArticleController@update',$article->id]]) !!}
 
-    @include('articles.form',['submitButtonText' => 'Edit Article']);
+    @include('articles.form',['submitButtonText' => 'Edit Article'])
 
     {!! Form::close()  !!}
 
 
-    @include ('errors.list');
+    @include ('errors.list')
 
 @stop
